@@ -1,0 +1,40 @@
+
+08-25
+- reference software for:
+   LB = 0.997 for UNet1024 model in my_unet_baseline.py
+   LB = 0.991 for UNet128  model in my_unet_baseline.py
+  (training logs are provided)
+
+- implement accumulated gradients
+- implement weighted boundary loss
+- implement merge bn into conv for faster inference
+
+   **the version is not backward compatible with previous version.
+
+
+
+-------------------------------------------------------------------------------------
+08-02
+- add UNet_double_1024_5, which use 512x512 as input and predict 1024x1024 mask.
+  UNet_double_1024_5 obtains LB score of 0.996.
+  note that many changes are made to support label and image of different size.
+  some unusec functions are broken because of this.
+  
+   **the version is not backward compatible with previous version.
+  
+
+07-31
+- add models unet{128,256,512}_{1,2,3}
+  unet512_2 obtains LB score of 0.995.
+  The training loss curves are included for reference.
+
+07-30
+- support for validation at training
+
+07-29a
+- fix minor bugs
+- add data agumentation in training
+- add visualisation for predictions on train sample during training
+
+07-29
+-  initial version

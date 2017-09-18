@@ -1,0 +1,3569 @@
+
+--- [START 2017-08-11 18:58:52] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7fc9ea88aef0>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 0.0738  0.9702 | 0.0570  0.9781 | 0.0510  0.9811  |  1.3 min 
+  2.0     270    0.0100   | 0.0340  0.9865 | 0.0449  0.9824 | 0.0447  0.9823  |  1.2 min 
+  3.0     270    0.0100   | 0.0304  0.9874 | 0.0351  0.9860 | 0.0344  0.9858  |  1.2 min 
+  4.0     270    0.0100   | 0.0268  0.9891 | 0.0341  0.9864 | 0.0290  0.9885  |  1.2 min 
+  5.0     270    0.0100   | 0.0237  0.9903 | 0.0297  0.9884 | 0.0264  0.9895  |  1.2 min 
+  6.0     270    0.0100   | 0.0242  0.9901 | 0.0279  0.9888 | 0.0288  0.9879  |  1.2 min 
+  7.0     270    0.0100   | 0.0221  0.9910 | 0.0265  0.9892 | 0.0234  0.9910  |  1.2 min 
+  8.0     270    0.0100   | 0.0224  0.9908 | 0.0261  0.9894 | 0.0253  0.9890  |  1.2 min 
+
+--- [START 2017-08-11 19:10:13] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f8b860f3e10>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 19:11:56] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f63c2ed0e48>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 0.0447  0.9830 | 0.0579  0.9776 | 0.0487  0.9813  |  1.3 min 
+  2.0     270    0.0100   | 0.0335  0.9869 | 0.0424  0.9834 | 0.0412  0.9830  |  1.2 min 
+  3.0     270    0.0100   | 0.0284  0.9884 | 0.0350  0.9859 | 0.0326  0.9868  |  1.2 min 
+  4.0     270    0.0100   | 0.0284  0.9884 | 0.0340  0.9864 | 0.0316  0.9872  |  1.3 min 
+  5.0     270    0.0100   | 0.0241  0.9903 | 0.0296  0.9883 | 0.0264  0.9893  |  1.3 min 
+  6.0     270    0.0100   | 0.0233  0.9905 | 0.0279  0.9889 | 0.0284  0.9880  |  1.3 min 
+  7.0     270    0.0100   | 0.0216  0.9913 | 0.0259  0.9895 | 0.0243  0.9902  |  1.2 min 
+  8.0     270    0.0100   | 0.0216  0.9912 | 0.0254  0.9897 | 0.0265  0.9887  |  1.2 min 
+  9.0     270    0.0100   | 0.0214  0.9912 | 0.0250  0.9901 | 0.0310  0.9883  |  1.3 min 
+ 10.0     270    0.0100   | 0.0229  0.9906 | 0.0262  0.9895 | 0.0240  0.9905  |  1.3 min 
+ 11.0     270    0.0100   | 0.0202  0.9917 | 0.0243  0.9902 | 0.0223  0.9911  |  1.2 min 
+ 12.0     270    0.0100   | 0.0197  0.9920 | 0.0233  0.9907 | 0.0225  0.9911  |  1.3 min 
+ 13.0     270    0.0100   | 0.0190  0.9923 | 0.0218  0.9913 | 0.0204  0.9919  |  1.3 min 
+ 14.0     270    0.0100   | 0.0189  0.9923 | 0.0230  0.9906 | 0.0229  0.9915  |  1.2 min 
+ 15.0     270    0.0100   | 0.0187  0.9924 | 0.0222  0.9912 | 0.0227  0.9905  |  1.2 min 
+ 16.0     270    0.0100   | 0.0193  0.9920 | 0.0215  0.9912 | 0.0223  0.9910  |  1.2 min 
+ 17.0     270    0.0100   | 0.0185  0.9924 | 0.0220  0.9913 | 0.0212  0.9916  |  1.3 min 
+ 18.0     270    0.0100   | 0.0173  0.9930 | 0.0219  0.9912 | 0.0242  0.9906  |  1.3 min 
+ 19.0     270    0.0100   | 0.0180  0.9927 | 0.0204  0.9917 | 0.0208  0.9920  |  1.2 min 
+ 20.0     270    0.0100   | 0.0180  0.9927 | 0.0209  0.9916 | 0.0209  0.9918  |  1.2 min 
+ 21.0     270    0.0100   | 0.0174  0.9929 | 0.0209  0.9917 | 0.0191  0.9922  |  1.2 min 
+ 22.0     270    0.0100   | 0.0185  0.9925 | 0.0200  0.9919 | 0.0222  0.9908  |  1.3 min 
+
+--- [START 2017-08-11 19:42:44] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7fb81c8b4e48>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 0.2820  0.9801 | 0.2893  0.9795 | 0.2916  0.9798  |  1.3 min 
+  2.0     270    0.0100   | 0.2603  0.9874 | 0.2775  0.9834 | 0.2753  0.9827  |  1.2 min 
+  3.0     270    0.0100   | 0.2560  0.9883 | 0.2663  0.9866 | 0.2659  0.9859  |  1.2 min 
+  4.0     270    0.0100   | 0.2562  0.9885 | 0.2638  0.9872 | 0.2611  0.9873  |  1.2 min 
+  5.0     270    0.0100   | 0.2511  0.9902 | 0.2615  0.9887 | 0.2523  0.9904  |  1.1 min 
+  6.0     270    0.0100   | 0.2490  0.9908 | 0.2590  0.9887 | 0.2566  0.9889  |  1.2 min 
+  7.0     270    0.0100   | 0.2494  0.9898 | 0.2555  0.9894 | 0.2567  0.9890  |  1.2 min 
+  8.0     270    0.0100   | 0.2466  0.9916 | 0.2565  0.9892 | 0.2486  0.9886  |  1.1 min 
+  9.0     270    0.0100   | 0.2465  0.9918 | 0.2560  0.9900 | 0.2568  0.9891  |  1.2 min 
+ 10.0     270    0.0100   | 0.2467  0.9912 | 0.2553  0.9902 | 0.2596  0.9887  |  1.2 min 
+ 11.0     270    0.0100   | 0.2447  0.9922 | 0.2547  0.9905 | 0.2484  0.9907  |  1.2 min 
+
+--- [START 2017-08-11 19:57:20] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f2861094e10>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | -0.2439  0.9824 | -0.2238  0.9806 | -0.2355  0.9830  |  1.2 min 
+
+--- [START 2017-08-11 19:59:34] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7fec7f633e48>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 20:00:19] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f8ac2792e48>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 0.2960  0.9802 | 0.3025  0.9806 | 0.2927  0.9841  |  1.2 min 
+  2.0     270    0.0100   | 0.2724  0.9876 | 0.2913  0.9837 | 0.2820  0.9835  |  1.2 min 
+  3.0     270    0.0100   | 0.2676  0.9891 | 0.2821  0.9866 | 0.2861  0.9869  |  1.2 min 
+
+--- [START 2017-08-11 20:05:01] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f4ba9d96e10>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | -0.6030  0.9808 | -0.5722  0.9821 | -0.5654  0.9831  |  1.2 min 
+
+--- [START 2017-08-11 20:07:33] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f397b75deb8>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 20:07:55] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7fbf14432eb8>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 1.0514  0.9797 | 1.0598  0.9770 | 1.0548  0.9787  |  1.2 min 
+
+--- [START 2017-08-11 20:10:34] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f268c54ceb8>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 1.0469  0.9809 | 1.0542  0.9796 | 1.0484  0.9818  |  1.2 min 
+  2.0     270    0.0100   | 1.0313  0.9873 | 1.0413  0.9842 | 1.0407  0.9834  |  1.2 min 
+
+--- [START 2017-08-11 20:13:21] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f057d372eb8>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 20:13:55] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f47205b1fd0>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 20:19:59] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7f5315f70e48>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+
+--- [START 2017-08-11 20:21:39] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+** dataset setting **
+	train_dataset.split = train_v0_4320
+	valid_dataset.split = valid_v0_768
+	test_dataset.split  = test_3197
+	len(train_dataset)  = 4320
+	len(valid_dataset)  = 768
+	len(test_dataset)   = 3197
+** net setting **
+<class 'net.segmentation.my_unet_baseline.UNet128'>
+
+UNet128 (
+  (down3): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(3, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down4): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down5): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (down6): StackEncoder (
+    (encode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (center): Sequential (
+    (0): ConvBnRelu2d (
+      (conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=0.0001, momentum=0.1, affine=True)
+      (relu): ReLU (inplace)
+    )
+  )
+  (up6): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(2048, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(512, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up5): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(1024, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(256, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up4): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(512, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(128, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (up3): StackDecoder (
+    (decode): Sequential (
+      (0): ConvBnRelu2d (
+        (conv): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (1): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+      (2): ConvBnRelu2d (
+        (conv): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(64, eps=0.0001, momentum=0.1, affine=True)
+        (relu): ReLU (inplace)
+      )
+    )
+  )
+  (classify): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+)
+
+    def __init__(self, in_shape):
+        super(UNet128, self).__init__()
+        C,H,W = in_shape
+        assert(C==3)
+
+        #128
+        self.down3 = StackEncoder( C,   128, kernel_size=3)   # 64
+        self.down4 = StackEncoder(128,  256, kernel_size=3)   # 32
+        self.down5 = StackEncoder(256,  512, kernel_size=3)   # 16
+        self.down6 = StackEncoder(512, 1024, kernel_size=3)   #  8
+
+        self.center = nn.Sequential(
+            ConvBnRelu2d(1024, 1024, kernel_size=3, padding=1, stride=1 ),
+        )
+
+        # 8
+        # x_big_channels, x_channels, y_channels
+        self.up6 = StackDecoder(1024,1024, 512, kernel_size=3)  # 16
+        self.up5 = StackDecoder( 512, 512, 256, kernel_size=3)  # 32
+        self.up4 = StackDecoder( 256, 256, 128, kernel_size=3)  # 64
+        self.up3 = StackDecoder( 128, 128,  64, kernel_size=3)  #128
+        self.classify = nn.Conv2d(64, 1, kernel_size=1, padding=0, stride=1, bias=True)
+
+
+    def forward(self, x):
+
+        out = x                       #;print('x    ',x.size())
+        down3,out = self.down3(out)   #;print('down3',down3.size())  #64
+        down4,out = self.down4(out)   #;print('down4',down4.size())  #32
+        down5,out = self.down5(out)   #;print('down5',down5.size())  #16
+        down6,out = self.down6(out)   #;print('down6',down6.size())  #8
+        pass                          #;print('out  ',out.size())
+
+        out = self.center(out)
+        out = self.up6(down6, out)
+        out = self.up5(down5, out)
+        out = self.up4(down4, out)
+        out = self.up3(down3, out)
+        out = self.classify(out)
+        out = torch.squeeze(out, dim=1)
+        return out
+
+
+** start training here! **
+ num_grad_acc x batch_size = 1 x 16=16
+ optimizer=<torch.optim.sgd.SGD object at 0x7fddfefefeb8>
+ LR=Step Learning Rates
+rates=[' 0.0100', ' 0.0050', ' 0.0010', ' 0.0001', '-1.0000']
+steps=['      0', '     35', '     40', '     42', '     44']
+
+
+epoch    iter      rate   | valid_loss/acc | train_loss/acc | batch_loss/acc ... 
+--------------------------------------------------------------------------------------------------
+  1.0     270    0.0100   | 0.1015  0.9809 | 0.1001  0.9822 | 0.1017  0.9827  |  1.3 min 
+  2.0     270    0.0100   | 0.0614  0.9888 | 0.0815  0.9855 | 0.0893  0.9839  |  1.2 min 
+  3.0     270    0.0100   | 0.0576  0.9893 | 0.0726  0.9868 | 0.0607  0.9891  |  1.2 min 
+  4.0     270    0.0100   | 0.0539  0.9901 | 0.0637  0.9886 | 0.0615  0.9883  |  1.2 min 
+  5.0     270    0.0100   | 0.0512  0.9904 | 0.0594  0.9894 | 0.0507  0.9910  |  1.2 min 
+  6.0     270    0.0100   | 0.0442  0.9918 | 0.0564  0.9899 | 0.0545  0.9898  |  1.2 min 
+  7.0     270    0.0100   | 0.0445  0.9917 | 0.0532  0.9902 | 0.0494  0.9913  |  1.2 min 
+  8.0     270    0.0100   | 0.0450  0.9916 | 0.0521  0.9905 | 0.0467  0.9909  |  1.7 min 
+  9.0     270    0.0100   | 0.0407  0.9924 | 0.0493  0.9910 | 0.0627  0.9883  |  1.2 min 
+ 10.0     270    0.0100   | 0.0392  0.9927 | 0.0507  0.9907 | 0.0445  0.9915  |  2.5 min 
+ 11.0     270    0.0100   | 0.0395  0.9927 | 0.0487  0.9911 | 0.0441  0.9916  |  2.6 min 
+ 12.0     270    0.0100   | 0.0392  0.9927 | 0.0483  0.9912 | 0.0465  0.9914  |  2.5 min 
+ 13.0     270    0.0100   | 0.0380  0.9929 | 0.0441  0.9920 | 0.0447  0.9918  |  2.5 min 
+ 14.0     270    0.0100   | 0.0378  0.9930 | 0.0446  0.9918 | 0.0437  0.9926  |  2.5 min 
+ 15.0     270    0.0100   | 0.0389  0.9928 | 0.0467  0.9916 | 0.0450  0.9913  |  2.5 min 
+ 16.0     270    0.0100   | 0.0372  0.9931 | 0.0441  0.9919 | 0.0431  0.9919  |  2.1 min 
+ 17.0     270    0.0100   | 0.0371  0.9931 | 0.0449  0.9918 | 0.0453  0.9918  |  1.2 min 
+ 18.0     270    0.0100   | 0.0379  0.9930 | 0.0468  0.9914 | 0.0474  0.9915  |  1.2 min 
+ 19.0     270    0.0100   | 0.0369  0.9931 | 0.0420  0.9922 | 0.0422  0.9923  |  1.2 min 
+ 20.0     270    0.0100   | 0.0371  0.9931 | 0.0425  0.9921 | 0.0409  0.9930  |  1.2 min 
+ 21.0     270    0.0100   | 0.0351  0.9935 | 0.0425  0.9923 | 0.0412  0.9921  |  1.2 min 
+ 22.0     270    0.0100   | 0.0345  0.9936 | 0.0391  0.9929 | 0.0418  0.9923  |  1.2 min 
+ 23.0     270    0.0100   | 0.0350  0.9935 | 0.0383  0.9929 | 0.0349  0.9934  |  1.2 min 
+ 24.0     270    0.0100   | 0.0347  0.9936 | 0.0416  0.9925 | 0.0383  0.9929  |  1.2 min 
+ 25.0     270    0.0100   | 0.0344  0.9937 | 0.0391  0.9929 | 0.0439  0.9920  |  1.2 min 
+ 26.0     270    0.0100   | 0.0351  0.9935 | 0.0432  0.9920 | 0.0422  0.9922  |  1.2 min 
+ 27.0     270    0.0100   | 0.0353  0.9934 | 0.0399  0.9927 | 0.0521  0.9904  |  1.2 min 
+ 28.0     270    0.0100   | 0.0338  0.9937 | 0.0397  0.9927 | 0.0374  0.9930  |  1.2 min 
+ 29.0     270    0.0100   | 0.0358  0.9934 | 0.0401  0.9927 | 0.0385  0.9929  |  1.2 min 
+ 30.0     270    0.0100   | 0.0337  0.9937 | 0.0399  0.9926 | 0.0379  0.9934  |  1.2 min 
+ 31.0     270    0.0100   | 0.0350  0.9936 | 0.0400  0.9926 | 0.0424  0.9924  |  1.2 min 
+ 32.0     270    0.0100   | 0.0338  0.9937 | 0.0380  0.9930 | 0.0358  0.9935  |  1.2 min 
+ 33.0     270    0.0100   | 0.0334  0.9938 | 0.0383  0.9930 | 0.0381  0.9926  |  1.2 min 
+ 34.0     270    0.0100   | 0.0340  0.9937 | 0.0368  0.9934 | 0.0359  0.9935  |  1.2 min 
+ 35.0     270    0.0100   | 0.0333  0.9939 | 0.0373  0.9932 | 0.0413  0.9925  |  1.2 min 
+ 36.0     270    0.0050   | 0.0328  0.9939 | 0.0343  0.9938 | 0.0376  0.9932  |  1.2 min 
+ 37.0     270    0.0050   | 0.0317  0.9941 | 0.0341  0.9937 | 0.0372  0.9934  |  1.2 min 
+ 38.0     270    0.0050   | 0.0320  0.9941 | 0.0353  0.9937 | 0.0347  0.9935  |  1.2 min 
+ 39.0     270    0.0050   | 0.0318  0.9941 | 0.0327  0.9941 | 0.0340  0.9934  |  1.2 min 
+ 40.0     270    0.0050   | 0.0314  0.9942 | 0.0340  0.9938 | 0.0334  0.9939  |  1.2 min 
+ 41.0     270    0.0010   | 0.0304  0.9944 | 0.0325  0.9942 | 0.0294  0.9948  |  1.2 min 
+ 42.0     270    0.0010   | 0.0305  0.9944 | 0.0311  0.9943 | 0.0306  0.9946  |  1.2 min 
+ 43.0     270    0.0001   | 0.0303  0.9945 | 0.0310  0.9944 | 0.0274  0.9948  |  1.2 min 
+ 44.0     270    0.0001   | 0.0302  0.9945 | 0.0321  0.9942 | 0.0319  0.9937  |  1.2 min 
+
+alltime = 66.649329 min
+
+--- [START 2017-08-11 22:34:40] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:34:50] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:35:14] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:35:25] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:35:31] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:35:49] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:36:00] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:36:17] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:37:26] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:37:37] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:37:44] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:37:58] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:38:45] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:39:13] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:39:40] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:39:54] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:40:16] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:41:01] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 22:41:36] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 23:04:09] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 23:19:22] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-11 23:20:21] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:12:20] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:13:49] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:14:30] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:15:28] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:15:46] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-12 20:16:40] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-13 14:43:15] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-13 20:16:51] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-13 20:18:39] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-13 20:22:52] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+
+
+--- [START 2017-08-13 20:25:07] ----------------------------------------------------------------
+
+** some project setting **
+	SEED    = 235202
+	file    = /root/share/project/kaggle-carvana-cars/build/car-segment_double/train_seg_net.py
+	out_dir = /root/share/project/kaggle-carvana-cars/results/baseline/UNet128-weight-00
+

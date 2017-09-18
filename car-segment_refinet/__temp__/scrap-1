@@ -1,0 +1,433 @@
+def make_combined_image_0(image, label, prob=None, label_color=2, prob_color=1):
+
+    H,W,C = image.shape
+    results = np.zeros((H, 3*W, 3),np.uint8)
+    p       = np.zeros((H,   W, 3),np.uint8)
+
+    image1= image.copy()
+    if prob is not None:
+        p[:,:,prob_color] = prob
+        draw_contour(image1, prob, color=(0,255,0), thickness=1)
+    if label is not None:
+        p[:,:,label_color] = label
+        draw_contour(image1, label, color=(0,0,255), thickness=1)
+
+    results[:,  0:W  ] = image1
+    results[:,  W:2*W] = p
+    results[:,2*W:3*W] = cv2.addWeighted(image, 1, p, 0.5, 0.) # image * α + mask * β + λ
+    return results
+
+
+
+class KgCarPriorDataset(KgCarDataset):
+
+    def get_prior(self,index):
+        name   = self.names[index]
+        folder = self.folder
+
+        prior_file = CARVANA_DIR + '/priors/%s/%s.png'%(folder,name)
+        prior = cv2.imread(prior_file,cv2.IMREAD_GRAYSCALE)
+        prior = prior.astype(np.float32)/255
+        return prior
+
+    def get_train_item(self,index):
+        image = self.get_image(index)
+        label = self.get_label(index)
+        prior = self.get_prior(index)
+
+        for t in self.transform:
+            image,prior,label = t(image,prior,label)
+        image = image_to_tensor(image)
+        label = label_to_tensor(label)
+        prior = prior_to_tensor(prior)
+        return image, prior,label, index
+
+    def get_test_item(self,index):
+        image = self.get_image(index)
+        prior = self.get_prior(index)
+
+        for t in self.transform:
+            image,prior = t(image,prior)
+        image = image_to_tensor(image)
+        prior = prior_to_tensor(prior)
+        return image, prior, index
+
+
+
+
+def run_check_dataset1():
+
+    dataset = KgCarPriorDataset('train_v0_4320', 'train256x256', #'train',
+                                transform=[
+                                    #lambda x,y:  random_horizontal_flip2(x,y),
+                                    #lambda x,y:  random_shift_scale_rotate2(x,y,shift_limit=(-0.0625,0.0625), scale_limit=(-0.1,0.1), rotate_limit=(-0,0)),
+                                    #lambda x,y:  fix_resize2(x,y, w=CARVANA_IMAGE_W,h=CARVANA_IMAGE_H),
+                                    #lambda x,y:  fix_crop2(x,y, roi=(0,CARVANA_IMAGE_H//2,CARVANA_IMAGE_W,CARVANA_IMAGE_H)),
+
+                                    #lambda x,y:  (random_brightness(x, limit=0.5, u=0.5),y),
+                                    #lambda x,y:  (random_contrast  (x, limit=0.5, u=0.5),y),
+                                    #lambda x,y:  (random_hsv(x, hue_limit=(-0.9,0.9), u=1),y),
+                                    #lambda x,y:   random_hue2(x, y, hue_limit=(-1,1), u=1),
+                                ],
+                                mode='train'
+
+                         )
+
+
+    if 1: #check indexing
+        for n in range(100):
+            image, prior, label, index = dataset[n]
+            image = tensor_to_image(image, std=255)
+            prior = tensor_to_prior(prior)
+            label = tensor_to_label(label)
+
+            im_show('image', image, resize=0.5)
+            im_show('prior', prior, resize=0.5)
+            im_show('label', label, resize=0.5)
+            cv2.waitKey(0)
+
+
+
+
+#decode and check
+def run_check_submit_csv():
+
+    #gz_file ='/root/share/project/kaggle-carvana-cars/results/ensemble/xxx/submit/results-xxx.csv.gz'
+    gz_file ='/root/share/project/kaggle-carvana-cars/results/single/UNet1024-weight-00/submit/results-UNet1024-weight-00.csv.gz'
+    df = pd.read_csv(gz_file, compression='gzip', error_bad_lines=False)
+
+    save_dir ='/root/share/project/kaggle-carvana-cars/results/single/UNet1024-weight-00/submit/results'
+    os.makedirs(save_dir,  exist_ok=True)
+
+    if 0:
+        def fix_string(string):
+            string = string.replace('<replace>/','')
+            string = string+'.jpg'
+            return string
+        df['img'] = df['img'].apply(fix_string)
+        df.to_csv(gz_file, index=False, compression='gzip')
+
+    indices = range(100064)  #[0,1,2,32000-1,32000,32000+1,100064-1]
+    for n in indices:
+        if(n%1000==0): print(n)
+        name = df.values[n][0]
+        img_file = CARVANA_DIR + '/images/test/%s'%(name)
+        image = cv2.imread(img_file)
+
+        rle   = df.values[n][1]
+        mask  = run_length_decode(rle,H=CARVANA_HEIGHT, W=CARVANA_WIDTH)
+        results = make_combined_image(image, label=None, prob=mask)
+        draw_shadow_text  (results, '%06d: %s'%(n,name), (5,80),  2, (255,255,255), 4)
+
+
+        results = cv2.resize(results,dsize=(0,0),fx=0.33,fy=0.33)
+        #im_show('mask', mask, resize=0.25)
+        im_show('results',results,0.10)
+        cv2.waitKey(1)
+        cv2.imwrite(save_dir + '/%s'%name, results)
+
+    pass
+
+
+def run_modify_submit_csv():
+
+    #gz_file ='/root/share/project/kaggle-carvana-cars/results/ensemble/xxx/submit/results-xxx.csv.gz'
+    gz_file  ='/root/share/project/kaggle-carvana-cars/results/single/UNet1024-weight-00/submit/results-UNet1024-weight-00.csv.gz'
+    gz_file1 ='/root/share/project/kaggle-carvana-cars/results/single/UNet1024-weight-00/submit/results-UNet1024-weight-00-shrink1.csv.gz'
+    df = pd.read_csv(gz_file, compression='gzip', error_bad_lines=False)
+
+    #increase 1 pixel elft and right
+
+    indices = range(100064)
+    for n in indices:
+        if(n%1000==0): print(n)
+        name = df.values[n][0]
+        rle  = df.values[n][1]
+
+        runs  = np.array([int(s) for s in rle.split(' ')]).reshape(-1,2)
+        for r in runs:
+           r[0] = r[0]+1
+           r[1] = r[1]-1
+        runs = runs.reshape(-1)
+        rle1 = ' '.join([str(r) for r in runs])
+
+        #mask = run_length_decode(rle1,H=CARVANA_HEIGHT, W=CARVANA_WIDTH)
+        #rle1 = run_length_encode(mask)
+        df.values[n][1] = rle1
+        xx=0
+    pass
+
+
+
+    df.to_csv(gz_file1, index=False, compression='gzip')
+
+
+# ------------------------------------------------------------------------------------
+#
+# def run_make_results():
+#
+#     out_dir  = '/root/share/project/kaggle-carvana-cars/results/single/UNet1024-shallow-01b'
+#      #out_dir  = '/root/share/project/kaggle-carvana-cars/results/baseline/UNet128-00'
+#     model_file = out_dir +'/snap/final.pth'  #final
+#
+#     #logging, etc --------------------
+#     shutil.rmtree(out_dir+'/valid/results_by_score',ignore_errors=True)
+#     shutil.rmtree(out_dir+'/valid/results_by_name',ignore_errors=True)
+#     os.makedirs(out_dir+'/valid/results_by_score',  exist_ok=True)
+#     os.makedirs(out_dir+'/valid/results_by_name',   exist_ok=True)
+#     backup_project_as_zip( os.path.dirname(os.path.realpath(__file__)), out_dir +'/backup/make_validate.code.zip')
+#
+#     log = Logger()
+#     log.open(out_dir+'/log.train.txt',mode='a')
+#     log.write('\n--- [START %s] %s\n\n' % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), '-' * 64))
+#     log.write('** some project setting **\n')
+#     log.write('\tSEED    = %u\n' % SEED)
+#     log.write('\tfile    = %s\n' % __file__)
+#     log.write('\tout_dir = %s\n' % out_dir)
+#     log.write('\n')
+#
+#     ## dataset ----------------------------------------
+#     def valid_augment(image,label):
+#         #image, label = random_horizontal_flip2(image, label,u=1)
+#         # image, label = random_shift_scale_rotate2(image, label, shift_limit=(-0.0625,0.0625),
+#         #           scale_limit=(-0.09,0.121), rotate_limit=(-0,0))
+#
+#         #image, label = random_hue2(image, label, hue_limit=(-1,1), u=0.5)
+#         #image = random_hue(image, hue_limit=(-0.5,-0.5), u=1)
+#         #image = random_brightness(image, limit=(0.5,0.5), u=1)
+#         #image = random_contrast  (image, limit=(-0.5,-0.5), u=1)
+#         # image = random_saturation(image, limit=0.3, u=0.5)
+#         #image = random_gray(image, u=1)
+#
+#         return  image, label
+#
+#
+#
+#
+#
+#     batch_size   =  1
+#     valid_dataset = KgCarDataset(
+#                                 #'train_v0_4320', 'train128x128',
+#                                 'valid_v0_768', 'train1024x1024',
+#                                 transform=[
+#                                     lambda x,y:  valid_augment(x, y),
+#                                 ])
+#     valid_loader  = DataLoader(
+#                         valid_dataset,
+#                         sampler = SequentialSampler(valid_dataset),
+#                         batch_size  = batch_size,
+#                         drop_last   = False,
+#                         num_workers = 6,
+#                         pin_memory  = True)
+#     ##check_dataset(valid_dataset, valid_loader), exit(0)
+#
+#     ## net ----------------------------------------
+#     net = Net(in_shape=(3, CARVANA_HEIGHT, CARVANA_WIDTH))
+#     net.load_state_dict(torch.load(model_file))
+#     net.cuda()
+#
+#     num_valid = len(valid_dataset)
+#     names = valid_dataset.names
+#     all_accs   =np.zeros(num_valid,np.float32)
+#     all_indices=np.zeros(num_valid,np.float32)
+#     net.eval()
+#
+#     start=0
+#     end  =0
+#     for it, (images, labels, indices) in enumerate(valid_loader, 0):
+#         images  = Variable(images,volatile=True).cuda()
+#         labels  = Variable(labels).cuda()
+#         batch_size = len(indices)
+#
+#         #forward
+#         logits = net(images)
+#         probs  = F.sigmoid(logits)
+#         masks  = (probs>0.5).float()
+#
+#         loss = criterion(logits, labels)
+#         accs = dice_loss(masks, labels, is_average=False)
+#         acc  = accs.sum()/batch_size
+#
+#
+#         end = start + batch_size
+#         all_accs   [start:end]=accs.data.cpu().numpy()
+#         all_indices[start:end]=indices.cpu().numpy()
+#         start=end
+#
+#         show_batch_results(indices, images, probs, labels=labels, wait=1,
+#                            out_dir=out_dir+'/valid', mode='both', names=names, epoch=0, it=0)
+#
+#     #save ----------------
+#     accuracy = all_accs.mean()
+#     print('accuracy=%f'%accuracy)
+#     with open(out_dir+'/valid/results-summary.txt', 'w') as f:
+#         for n in range(num_valid):
+#             f.write('%d\t%s\t%f\n'%(all_indices[n],names[n],all_accs[n]))
+#
+#         f.write('\naccuracy=%f\n'%accuracy)
+#
+#
+#     pass
+#
+#
+#
+# def run_make_full_results():
+#
+#     out_dir  = '/root/share/project/kaggle-carvana-cars/results/single/UNet1024-shallow-01b'
+#      #out_dir  = '/root/share/project/kaggle-carvana-cars/results/baseline/UNet128-00'
+#     model_file = out_dir +'/snap/final.pth'  #final
+#
+#     #logging, etc --------------------
+#     shutil.rmtree(out_dir+'/valid/full_results_by_score',ignore_errors=True)
+#     ##shutil.rmtree(out_dir+'/valid/full_results_by_name',ignore_errors=True)
+#     os.makedirs(out_dir+'/valid/full_results_by_score',  exist_ok=True)
+#     os.makedirs(out_dir+'/valid/full_results_by_name',   exist_ok=True)
+#     backup_project_as_zip( os.path.dirname(os.path.realpath(__file__)), out_dir +'/backup/make_validate.code.zip')
+#
+#     log = Logger()
+#     log.open(out_dir+'/log.train.txt',mode='a')
+#     log.write('\n--- [START %s] %s\n\n' % (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), '-' * 64))
+#     log.write('** some project setting **\n')
+#     log.write('\tSEED    = %u\n' % SEED)
+#     log.write('\tfile    = %s\n' % __file__)
+#     log.write('\tout_dir = %s\n' % out_dir)
+#     log.write('\n')
+#
+#     ## dataset ----------------------------------------
+#     def valid_augment(image,label):
+#         #image, label = random_horizontal_flip2(image, label,u=1)
+#         # image, label = random_shift_scale_rotate2(image, label, shift_limit=(-0.0625,0.0625),
+#         #           scale_limit=(-0.09,0.121), rotate_limit=(-0,0))
+#
+#         #image, label = random_hue2(image, label, hue_limit=(-1,1), u=0.5)
+#         #image = random_hue(image, hue_limit=(-0.5,-0.5), u=1)
+#         #image = random_brightness(image, limit=(0.5,0.5), u=1)
+#         #image = random_contrast  (image, limit=(-0.5,-0.5), u=1)
+#         # image = random_saturation(image, limit=0.3, u=0.5)
+#         #image = random_gray(image, u=1)
+#
+#         return  image, label
+#
+#
+#
+#
+#
+#     batch_size   =  1
+#     valid_dataset = KgCarDataset(
+#                                 #'train_v0_4320', 'train128x128',
+#                                 'valid_v0_768', 'train1024x1024',
+#                                 transform=[
+#                                     lambda x,y:  valid_augment(x, y),
+#                                 ])
+#     valid_loader  = DataLoader(
+#                         valid_dataset,
+#                         sampler = SequentialSampler(valid_dataset),
+#                         batch_size  = batch_size,
+#                         drop_last   = False,
+#                         num_workers = 6,
+#                         pin_memory  = True)
+#     ##check_dataset(valid_dataset, valid_loader), exit(0)
+#
+#     ## net ----------------------------------------
+#     net = Net(in_shape=(3, CARVANA_HEIGHT, CARVANA_WIDTH))
+#     net.load_state_dict(torch.load(model_file))
+#     net.cuda()
+#
+#     num_valid = len(valid_dataset)
+#     names = valid_dataset.names
+#     all_accs   =np.zeros(num_valid,np.float32)
+#     all_indices=np.zeros(num_valid,np.float32)
+#     net.eval()
+#
+#     start=0
+#     end  =0
+#     for it, (images, labels, indices) in enumerate(valid_loader, 0):
+#         images  = Variable(images,volatile=True).cuda()
+#         labels  = Variable(labels).cuda()
+#         batch_size = len(indices)
+#
+#         #forward
+#         logits = net(images)
+#         probs  = F.sigmoid(logits)
+#
+#
+#         probs  = (probs.data.cpu().numpy()*255).astype(np.uint8)
+#         for b in range(batch_size):
+#             name = names[indices[b]]
+#             mask_file = CARVANA_DIR + '/annotations/%s/%s_mask.png'%('train',name)
+#             label = cv2.imread(mask_file,cv2.IMREAD_GRAYSCALE)
+#             label = label>127
+#
+#             prob = probs[b]
+#             prob = cv2.resize(prob,dsize=(CARVANA_WIDTH,CARVANA_HEIGHT),interpolation=cv2.INTER_LINEAR)  #INTER_CUBIC  ##
+#             mask = prob>127
+#
+#             score = one_dice_loss_py(mask, label)
+#             all_accs   [start+b] = score
+#             all_indices[start+b] = indices[b]
+#
+#             #----------------------------------------------------------------
+#             if 1:
+#                 results = np.zeros((CARVANA_HEIGHT*CARVANA_WIDTH,3),np.uint8)
+#                 a = (2*label+mask).reshape(-1)
+#                 miss = np.where(a==2)[0]
+#                 hit  = np.where(a==3)[0]
+#                 fp   = np.where(a==1)[0]
+#                 label_sum=label.sum()
+#                 mask_sum =mask.sum()
+#
+#                 results[miss] = np.array([0,0,255])
+#                 results[hit] = np.array([64,64,64])
+#                 results[fp] = np.array([0,255,0])
+#                 results = results.reshape(CARVANA_HEIGHT,CARVANA_WIDTH,3)
+#                 L=30
+#                 draw_shadow_text  (results, '%s.jpg'%(name), (5,1*L),  1, (255,255,255), 2)
+#                 draw_shadow_text  (results, '%0.5f'%(score), (5,2*L),  1, (255,255,255), 2)
+#                 draw_shadow_text  (results, 'label_sum  = %0.0f'%(label_sum), (5,3*L),  1, (255,255,255), 2)
+#                 draw_shadow_text  (results, 'mask_sum  = %0.0f (%0.4f)'%(mask_sum,mask_sum/label_sum), (5,4*L),  1, (255,255,255), 2)
+#                 draw_shadow_text  (results, 'miss  = %0.0f (%0.4f)'%(len(miss), len(miss)/label_sum), (5,5*L),  1, (0,0,255), 2)
+#                 draw_shadow_text  (results, 'fp     = %0.0f (%0.4f)'%(len(fp), len(fp)/mask_sum), (5,6*L),  1, (0,255,0), 2)
+#
+#
+#                 print('%0.6f'%score)
+#                 im_show('results',results,0.33)
+#                 #im_show('label',label*255,0.33)
+#                 #im_show('mask',mask*255,0.33)
+#                 cv2.waitKey(1)
+#
+#                 cv2.imwrite(out_dir+'/valid/full_results_by_score/%0.5f-%s.png'%(score,name), results)
+#                 cv2.imwrite(out_dir+'/valid/full_results_by_name/%s.png'%(name), results)
+#         start=start + batch_size
+#
+#
+#     #save ----------------
+#     accuracy = all_accs.mean()
+#     print('accuracy=%f'%accuracy)
+#     with open(out_dir+'/valid/full_results-summary.INTER_LINEAR.txt', 'w') as f:
+#         for n in range(num_valid):
+#             f.write('%d\t%s\t%f\n'%(all_indices[n],names[n],all_accs[n]))
+#
+#         f.write('\naccuracy=%f\n'%accuracy)
+#
+#
+#
+#
+#
+#     pass
+
+    if 0:
+        #with    bn:  0.050809,0.049483  (160 images)  0.997610 (0.997267)
+        #without bn:  0.051060,0.051618                0.997610 (0.997267)
+
+        #with    bn (fp16) : 0.052841
+        #without bn (fp16) :
+
+
+
+        print ('merging bn ....')
+        for m in net.modules():
+            if isinstance(m, (StackEncoder, StackDecoder)):
+                for mm in m.modules():
+                    if isinstance(mm, (ConvBnRelu2d,)):
+                        mm.merge_bn_to_conv() #ConvBnRelu2d
+                pass

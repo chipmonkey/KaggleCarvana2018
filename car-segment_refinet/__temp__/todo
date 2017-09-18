@@ -1,0 +1,9 @@
+#https://github.com/meetshah1995/pytorch-semseg
+
+1. process bar for csv generation
+
+Next experiment plans:
+
+- long epoch (eg 100)
+- unsupervised
+

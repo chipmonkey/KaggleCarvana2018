@@ -1,0 +1,11 @@
+pip install numpy
+pip install pandas
+pip install sklearn
+pip install scikit-image
+pip install scipy
+pip install pillow
+pip install opencv-python
+pip install matplotlib
+pip install dill
+pip install http://download.pytorch.org/whl/cu75/torch-0.2.0.post3-cp35-cp35m-manylinux1_x86_64.whl 
+pip install torchvision
